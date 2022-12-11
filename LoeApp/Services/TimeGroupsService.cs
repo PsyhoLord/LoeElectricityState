@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using LoeApp.Helpers;
 
-namespace LoeApp;
+namespace LoeApp.Services;
 
 public class TimeGroupsService
 {
+    private HtmlParseService _htmlParseService = new HtmlParseService();
+    
     private readonly List<int> _groupOffsets = new() { 0, 1, 2 };
 
     private List<TimeBorders> TimeBordersList = new()
@@ -41,6 +43,13 @@ public class TimeGroupsService
             BorderEnd = new TimeSpan(25, 0, 0)
         }
     };
+
+    public string GetLoeStatus()
+    {
+        _htmlParseService.Test();
+
+        return string.Empty;
+    }
 
     public TimeBorders GetTimeBordersForGroup(int timeGroup)
     {

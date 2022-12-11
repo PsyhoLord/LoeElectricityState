@@ -5,7 +5,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-
+using LoeApp.Services;
 using Timers = System.Timers;
 
 namespace LoeApp
@@ -23,6 +23,8 @@ namespace LoeApp
         public MainWindow()
         {
             InitializeComponent();
+
+            GetLoeStatus();
 
             currentElectricityGroup = 3 - 1;
             CurrentStateControl.Init(true);
@@ -85,7 +87,11 @@ namespace LoeApp
                 UseShellExecute = true,
             };
             System.Diagnostics.Process.Start(sInfo);
-            
+        }
+
+        private void GetLoeStatus()
+        {
+            _timeGroupsService.GetLoeStatus();
         }
     }
 }
