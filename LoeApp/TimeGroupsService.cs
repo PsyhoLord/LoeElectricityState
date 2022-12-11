@@ -5,7 +5,7 @@ namespace LoeApp;
 
 public class TimeGroupsService
 {
-    private List<ElectricityStateEnum> StatesOffsets = 
+    private List<ElectricityStateEnum> StatesOffsets =
         new()
         {
             ElectricityStateEnum.No,
@@ -18,46 +18,55 @@ public class TimeGroupsService
     {
         new()
         {
-            BorderStart = new TimeSpan(1,0,0),
-            BorderEnd = new TimeSpan(5,0,0)
+            BorderStart = new TimeSpan(1, 0, 0),
+            BorderEnd = new TimeSpan(5, 0, 0)
         },
         new()
         {
-            BorderStart = new TimeSpan(5,0,0),
-            BorderEnd = new TimeSpan(9,0,0)
+            BorderStart = new TimeSpan(5, 0, 0),
+            BorderEnd = new TimeSpan(9, 0, 0)
         },
         new()
         {
-            BorderStart = new TimeSpan(9,0,0),
-            BorderEnd = new TimeSpan(13,0,0)
+            BorderStart = new TimeSpan(9, 0, 0),
+            BorderEnd = new TimeSpan(13, 0, 0)
         },
         new()
         {
-            BorderStart = new TimeSpan(13,0,0),
-            BorderEnd = new TimeSpan(17,0,0)
+            BorderStart = new TimeSpan(13, 0, 0),
+            BorderEnd = new TimeSpan(17, 0, 0)
         },
         new()
         {
-            BorderStart = new TimeSpan(17,0,0),
-            BorderEnd = new TimeSpan(21,0,0)
+            BorderStart = new TimeSpan(17, 0, 0),
+            BorderEnd = new TimeSpan(21, 0, 0)
         },
         new()
         {
-            BorderStart = new TimeSpan(21,0,0),
-            BorderEnd = new TimeSpan(25,0,0)
+            BorderStart = new TimeSpan(21, 0, 0),
+            BorderEnd = new TimeSpan(25, 0, 0)
         }
     };
 
-    public TimeBorders GetTimeBordersForGroup(int group)
+    public TimeBorders GetTimeBordersForGroup(int timeGroup)
     {
-        return TimeBordersList[group];
+        return TimeBordersList[timeGroup];
+    }
+
+    public TimeBorders GetTimeBordersForNextGroup(int timeGroup)
+    {
+        timeGroup++;
+        if (timeGroup > 5)
+            timeGroup -= 5;
+
+        return TimeBordersList[timeGroup];
     }
 
     public int GetTimeGroup(DateTimeOffset offset)
     {
         var hours = offset.Hour;
 
-        if(hours < 1) return 5;
+        if (hours < 1) return 5;
 
         for (var i = 0; i < TimeBordersList.Count; i++)
         {
@@ -73,7 +82,7 @@ public class TimeGroupsService
     {
         switch (dayOfWeek)
         {
-            
+
             case DayOfWeek.Monday:
                 return 0;
             case DayOfWeek.Tuesday:
@@ -100,6 +109,7 @@ public class TimeGroupsService
         var offSet = GetTimeGroupOffset(0, currentTime);
         offSet = GetDayOfWeekOffset(offSet, currentTime.DayOfWeek);
         offSet = GetGroupOffset(offSet, GroupOffsets[group - 1]);
+
 
         return (ElectricityStateEnum)offSet;
     }
