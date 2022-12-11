@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Threading;
 using System.Timers;
 using System.Windows;
+using System.Windows.Threading;
+
+using Timers = System.Timers;
 
 namespace LoeApp
 {
@@ -10,7 +14,7 @@ namespace LoeApp
     public partial class MainWindow : Window
     {
         private readonly TimeGroupsService _timeGroupsService = new TimeGroupsService();
-        private Timer _refreshTimer;
+        private Timers.Timer _refreshTimer;
 
         public MainWindow()
         {
@@ -24,9 +28,9 @@ namespace LoeApp
         private void SetTimer()
         {
             OnTimedEvent();
-            // Create a timer with a two second interval.
-            _refreshTimer = new Timer(TimeSpan.FromMinutes(1));
-            // Hook up the Elapsed event for the timer. 
+            
+            _refreshTimer = new Timers.Timer(TimeSpan.FromMinutes(1));
+            
             _refreshTimer.Elapsed += OnTimedEvent;
             _refreshTimer.AutoReset = true;
             _refreshTimer.Enabled = true;
@@ -39,16 +43,20 @@ namespace LoeApp
 
         private void Refresh()
         {
-            var timeGroup = _timeGroupsService.GetTimeGroup(DateTimeOffset.Now);
-            var timeBorders = _timeGroupsService.GetTimeBordersForGroup(timeGroup);
-            var timeNextBorders = _timeGroupsService.GetTimeBordersForNextGroup(timeGroup);
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate {
+                CurrentTimeLabel.Content = $"{DateTime.Now:HH:mm}";
 
-            var currentElectricityState = _timeGroupsService.GetCurrentElectricityStatus(3);
+                var timeGroup = _timeGroupsService.GetTimeGroup(DateTimeOffset.Now);
+                var timeBorders = _timeGroupsService.GetTimeBordersForGroup(timeGroup);
+                var timeNextBorders = _timeGroupsService.GetTimeBordersForNextGroup(timeGroup);
 
-            var nextElectricityState = _timeGroupsService.GetNextElectricityStateEnum(currentElectricityState);
+                var currentElectricityState = _timeGroupsService.GetCurrentElectricityStatus(3);
 
-            CurrentStateControl.Refresh(currentElectricityState, timeBorders);
-            NextStateControl.Refresh(nextElectricityState, timeNextBorders);
+                var nextElectricityState = _timeGroupsService.GetNextElectricityStateEnum(currentElectricityState);
+
+                CurrentStateControl.Refresh(currentElectricityState, timeBorders);
+                NextStateControl.Refresh(nextElectricityState, timeNextBorders);
+            }));
         }
     }
 }

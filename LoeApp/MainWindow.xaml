@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LoeApp"
         xmlns:controls="clr-namespace:LoeApp.Controls"
         mc:Ignorable="d"
+        Background="#CCC"
         Title="MainWindow" Height="450" Width="600">
     <Window.Resources>
         <Style TargetType="Label" x:Key="StateTimeStyle">
@@ -17,6 +18,13 @@
     </Window.Resources>
 
     <StackPanel Orientation="Vertical">
+        <Label 
+            x:Name="CurrentTimeLabel"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            Margin="0,10"
+               />
+
         <controls:ElectricityStateControl
             x:Name="CurrentStateControl"
             VerticalAlignment="Top"
