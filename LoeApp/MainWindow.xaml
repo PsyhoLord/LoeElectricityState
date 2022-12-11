@@ -1,0 +1,38 @@
+﻿<Window x:Class="LoeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoeApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600">
+    <StackPanel Orientation="Vertical">
+        <Grid 
+            x:Name="StateBackground"
+            HorizontalAlignment="Stretch"
+            Height="50"
+            VerticalAlignment="Top"
+            Background="CornflowerBlue">
+
+            <Label x:Name="StateLabel" Content="TEST" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   FontSize="24"
+                   Foreground="White"/>
+        </Grid>
+
+        <Grid 
+            x:Name="NextStateBackground"
+            HorizontalAlignment="Stretch"
+            Height="50"
+            VerticalAlignment="Top"
+            Background="DarkGray">
+
+            <Label x:Name="NextStateLabel" Content="TEST" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   FontSize="24"
+                   Foreground="White"/>
+        </Grid>
+    </StackPanel>
+</Window>
