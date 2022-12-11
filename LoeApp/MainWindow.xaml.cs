@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Windows;
 
 namespace LoeApp
@@ -9,13 +10,30 @@ namespace LoeApp
     public partial class MainWindow : Window
     {
         private readonly TimeGroupsService _timeGroupsService = new TimeGroupsService();
+        private static Timer RefreshTimer;
 
         public MainWindow()
         {
             InitializeComponent();
 
             CurrentStateControl.Init(true);
-            
+
+            SetTimer();
+        }
+
+        private void SetTimer()
+        {
+            OnTimedEvent();
+            // Create a timer with a two second interval.
+            RefreshTimer = new Timer(TimeSpan.FromMinutes(1));
+            // Hook up the Elapsed event for the timer. 
+            RefreshTimer.Elapsed += OnTimedEvent;
+            RefreshTimer.AutoReset = true;
+            RefreshTimer.Enabled = true;
+        }
+
+        private void OnTimedEvent(object source = null, ElapsedEventArgs? e = null)
+        {
             Refresh();
         }
 
