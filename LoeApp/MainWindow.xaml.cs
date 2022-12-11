@@ -28,12 +28,14 @@ namespace LoeApp
             CurrentStateControl.Init(true);
             NextStateControl.Init();
 
+            electricityGroupList.IsEditable = true;
+            electricityGroupList.IsReadOnly = true;
             electricityGroupList.ItemsSource = new List<int> {1,2,3};
             electricityGroupList.Text = $"{3}";
             electricityGroupList.SelectionChanged += (sender, args) =>
             {
                 var comboBox = sender as ComboBox;
-                currentElectricityGroup = (int)comboBox.SelectedIndex;
+                currentElectricityGroup = comboBox.SelectedIndex;
                 Refresh();
             };
 
@@ -44,7 +46,7 @@ namespace LoeApp
         {
             OnTimedEvent();
             
-            _refreshTimer = new Timers.Timer(TimeSpan.FromMinutes(1));
+            _refreshTimer = new Timers.Timer(TimeSpan.FromSeconds(5));
             
             _refreshTimer.Elapsed += OnTimedEvent;
             _refreshTimer.AutoReset = true;
