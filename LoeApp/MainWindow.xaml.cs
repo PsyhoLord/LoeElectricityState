@@ -91,6 +91,14 @@ namespace LoeApp
 
             currentStateProgressBar.Background = currentChosenStyle.StateBackground;
             currentStateProgressBar.Foreground = currentChosenStyle.StateProgressForeground;
+
+            var dateTime = DateTimeOffset.Now;
+            dateTime = dateTime - timeBorders.BorderStart;
+
+            var totalHours = dateTime.Hour;
+            var totalMinutes = dateTime.Minute;
+
+            currentStateProgressBar.Value = totalHours * 100 + totalMinutes;
         }
 
         private void ApplyNextStateHeaderStyle(ElectricityStateEnum currentElectricityState, TimeBorders timeBorders)
