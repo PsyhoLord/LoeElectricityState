@@ -6,7 +6,7 @@ namespace LoeApp;
 
 public class TimeGroupsService
 {
-    private List<int> GroupOffsets = new() { 0, 1, 2 };
+    private readonly List<int> _groupOffsets = new() { 0, 1, 2 };
 
     private List<TimeBorders> TimeBordersList = new()
     {
@@ -74,8 +74,7 @@ public class TimeGroupsService
 
         var offSet = GetTimeGroupOffset(0, currentTime);
         offSet = GetDayOfWeekOffset(offSet, currentTime.DayOfWeek);
-        offSet = GetGroupOffset(offSet, GroupOffsets[group - 1]);
-
+        offSet = GetGroupOffset(offSet, _groupOffsets[group - 1]);
 
         return (ElectricityStateEnum)offSet;
     }
