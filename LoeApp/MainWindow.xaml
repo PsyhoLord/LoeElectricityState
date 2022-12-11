@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoeApp"
+        xmlns:controls="clr-namespace:LoeApp.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600">
     <Window.Resources>
@@ -16,59 +17,16 @@
     </Window.Resources>
 
     <StackPanel Orientation="Vertical">
-        <Grid 
-            x:Name="StateBackground"
-            HorizontalAlignment="Stretch"
-            Height="50"
+        <controls:ElectricityStateControl
+            x:Name="CurrentStateControl"
             VerticalAlignment="Top"
-            Background="CornflowerBlue">
-
-            <ProgressBar x:Name = "currentStateProgressBar"
-                         Value = "100" 
-                         Maximum = "400"
-                         BorderThickness="0"
-                         IsIndeterminate = "False" />
-
-            <Label x:Name="StateLabel" Content="TEST" HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"
-                   FontWeight="Bold"
-                   FontSize="24"
-                   Foreground="White"/>
-
-            <Label x:Name="StateStartLabel"
-                   HorizontalAlignment="Left"
-                   Content="1:00"
-                   Style="{StaticResource StateTimeStyle}"/>
-
-            <Label x:Name="StateEndLabel"
-                   HorizontalAlignment="Right"
-                   Content="1:00"
-                   Style="{StaticResource StateTimeStyle}"/>
-            
-        </Grid>
-
-        <Grid 
-            x:Name="NextStateBackground"
-            HorizontalAlignment="Stretch"
             Height="50"
+            HorizontalAlignment="Stretch" />
+
+        <controls:ElectricityStateControl
+            x:Name="NextStateControl"
             VerticalAlignment="Top"
-            Background="DarkGray">
-
-            <Label x:Name="NextStateLabel" Content="TEST" HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"
-                   FontWeight="Bold"
-                   FontSize="24"
-                   Foreground="White"/>
-
-            <Label x:Name="NextStateStartLabel"
-                   HorizontalAlignment="Left"
-                   Content="1:00"
-                   Style="{StaticResource StateTimeStyle}"/>
-
-            <Label x:Name="NextEndStateLabel"
-                   HorizontalAlignment="Right"
-                   Content="1:00"
-                   Style="{StaticResource StateTimeStyle}"/>
-        </Grid>
+            Height="50"
+            HorizontalAlignment="Stretch" />
     </StackPanel>
 </Window>

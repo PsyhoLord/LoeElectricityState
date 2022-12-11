@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using LoeApp.Helpers;
 
 namespace LoeApp;
 
 public class TimeGroupsService
 {
-    private List<ElectricityStateEnum> StatesOffsets =
-        new()
-        {
-            ElectricityStateEnum.No,
-            ElectricityStateEnum.Yes,
-            ElectricityStateEnum.Maybe
-        };
     private List<int> GroupOffsets = new() { 0, 1, 2 };
 
     private List<TimeBorders> TimeBordersList = new()
@@ -55,11 +49,7 @@ public class TimeGroupsService
 
     public TimeBorders GetTimeBordersForNextGroup(int timeGroup)
     {
-        timeGroup++;
-        if (timeGroup > 5)
-            timeGroup -= 5;
-
-        return TimeBordersList[timeGroup];
+        return TimeBordersList[ClearOffsetFromPeriodic(++timeGroup, 5)];
     }
 
     public int GetTimeGroup(DateTimeOffset offset)
@@ -78,30 +68,6 @@ public class TimeGroupsService
         throw new NotImplementedException();
     }
 
-    private int GetDayOfWeekNumber(DayOfWeek dayOfWeek)
-    {
-        switch (dayOfWeek)
-        {
-
-            case DayOfWeek.Monday:
-                return 0;
-            case DayOfWeek.Tuesday:
-                return 1;
-            case DayOfWeek.Wednesday:
-                return 2;
-            case DayOfWeek.Thursday:
-                return 3;
-            case DayOfWeek.Friday:
-                return 4;
-            case DayOfWeek.Saturday:
-                return 5;
-            case DayOfWeek.Sunday:
-                return 6;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
     public ElectricityStateEnum GetCurrentElectricityStatus(int group)
     {
         var currentTime = DateTimeOffset.Now;
@@ -118,8 +84,7 @@ public class TimeGroupsService
     {
         var newState = (int)currentElectricityState + 1;
 
-        if (newState > 2)
-            newState -= 3;
+        newState = ClearOffsetFromPeriodic(newState, 3);
 
         return (ElectricityStateEnum)newState;
     }
@@ -130,39 +95,31 @@ public class TimeGroupsService
 
         var offset = timeGroup;
 
-        if (offset > 2)
-        {
-            var x = offset / 3;
-            offset -= 3 * x;
-        }
-
-        return offset;
+        return ClearOffsetFromPeriodic(offset, 3);
     }
 
     private int GetDayOfWeekOffset(int prevOffset, DayOfWeek dayOfWeek)
     {
-        var dayOfWeekUkraine = GetDayOfWeekNumber(dayOfWeek);
+        var dayOfWeekUkraine = MainHelper.GetDayOfWeekNumber(dayOfWeek);
 
-        var offset = (int)prevOffset + dayOfWeekUkraine;
+        var offset = prevOffset + dayOfWeekUkraine;
 
-        if (offset > 2)
-        {
-            var x = offset / 3;
-            offset -= 3 * x;
-        }
-
-        return offset;
+        return ClearOffsetFromPeriodic(offset, 3);
     }
 
     private int GetGroupOffset(int prevOffset, int group)
     {
         var offset = prevOffset + group;
+        return ClearOffsetFromPeriodic(offset, 3);
+    }
 
-        if (offset > 2)
-        {
-            var x = offset / 3;
-            offset -= 3 * x;
-        }
+    private int ClearOffsetFromPeriodic(int offset, int period)
+    {
+        if (offset < period)
+            return offset;
+
+        var x = offset / period;
+        offset -= period * x;
 
         return offset;
     }
