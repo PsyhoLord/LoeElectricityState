@@ -23,7 +23,7 @@ namespace LoeApp.Controls
                         StateBackground = MainHelper.CreateColorBrushRgb(127, 132, 135),
                         StateForeground = MainHelper.CreateColorBrushRgb(250, 248, 241),
                         StateProgressForeground = MainHelper.CreateColorBrushRgb(65, 63, 66),
-                        StateText = "NO"
+                        StateText = "Немає енергія"
                     }
                 },
                 {
@@ -33,7 +33,7 @@ namespace LoeApp.Controls
                         StateBackground = MainHelper.CreateColorBrushRgb(229, 237, 183), // rgb(216, 233, 168)
                         StateForeground = MainHelper.CreateColorBrushRgb(30, 81, 40),
                         StateProgressForeground = MainHelper.CreateColorBrushRgb(78, 159, 61),
-                        StateText = "YES"
+                        StateText = "Є енергії"
                     }
                 },
                 {
@@ -43,7 +43,7 @@ namespace LoeApp.Controls
                         StateBackground = MainHelper.CreateColorBrushRgb(250, 240, 175),
                         StateForeground = MainHelper.CreateColorBrushRgb(115, 95, 50),
                         StateProgressForeground = MainHelper.CreateColorBrushRgb(198, 151, 73),
-                        StateText = "MAYBE"
+                        StateText = "Можливе відключення"
                     }
                 }
             };
@@ -55,7 +55,7 @@ namespace LoeApp.Controls
 
         public void Init(bool progressBarVisible = false)
         {
-            currentStateProgressBar.Visibility = false ? Visibility.Hidden : Visibility.Visible;
+            currentStateProgressBar.Visibility = progressBarVisible ? Visibility.Visible : Visibility.Hidden;
         }
 
         

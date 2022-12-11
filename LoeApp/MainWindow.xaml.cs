@@ -15,7 +15,7 @@ namespace LoeApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly TimeGroupsService _timeGroupsService = new TimeGroupsService();
+        private readonly TimeGroupsService _timeGroupsService = new();
         private Timers.Timer _refreshTimer;
         private Timers.Timer _refreshStreetTimer;
 
@@ -36,13 +36,21 @@ namespace LoeApp
             InitElectricityGroupList();
             InitStreetGroupList();
 
-            SettlementControl.SetTitle("Settlement:");
-            StreetControl.SetTitle("Street:");
-            BuildingControl.SetTitle("Building:");
-            TurnOffTypeControl.SetTitle("Turn Off Type:");
-            ReasonControl.SetTitle("Reason:");
-            TurnOffTimeControl.SetTitle("Turn Off Time:");
-            ExpectedTurnOnTimeControl.SetTitle("Expected Turn On Time:");
+            //SettlementControl.SetTitle("Settlement:");
+            //StreetControl.SetTitle("Street:");
+            //BuildingControl.SetTitle("Building:");
+            //TurnOffTypeControl.SetTitle("Turn Off Type:");
+            //ReasonControl.SetTitle("Reason:");
+            //TurnOffTimeControl.SetTitle("Turn Off Time:");
+            //ExpectedTurnOnTimeControl.SetTitle("Expected Turn On Time:");
+
+            SettlementControl.SetTitle("Населений пункт:");
+            StreetControl.SetTitle("Вулиця:");
+            BuildingControl.SetTitle("Будинок:");
+            TurnOffTypeControl.SetTitle("Тип вимкнення:");
+            ReasonControl.SetTitle("Причина:");
+            TurnOffTimeControl.SetTitle("Час вимкнення:");
+            ExpectedTurnOnTimeControl.SetTitle("Очікуваний час ввімкнення:");
 
             SetTimer();
         }
@@ -70,7 +78,7 @@ namespace LoeApp
             electricityStreetList.IsReadOnly = false;
             electricityStreetList.IsTextSearchEnabled = true;
             electricityStreetList.ItemsSource = _streets;
-            electricityStreetList.Text = $"Choose street";
+            electricityStreetList.Text = $"Оберіть вулицю";
             electricityStreetList.SelectionChanged += (sender, args) =>
             {
                 var comboBox = sender as ComboBox;
