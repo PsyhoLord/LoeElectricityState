@@ -17,22 +17,41 @@ namespace LoeApp
     {
         private readonly TimeGroupsService _timeGroupsService = new TimeGroupsService();
         private Timers.Timer _refreshTimer;
+        private Timers.Timer _refreshStreetTimer;
 
         private int currentElectricityGroup;
+        private int _currentStreet = -1;
+        private List<DataRow> _streets;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            GetLoeStatus();
-
             currentElectricityGroup = 3 - 1;
             CurrentStateControl.Init(true);
             NextStateControl.Init();
 
-            electricityGroupList.IsEditable = true;
+            _streets = _timeGroupsService.GetLoeStatus();
+
+            InitElectricityGroupList();
+            InitStreetGroupList();
+
+            SettlementControl.SetTitle("Settlement:");
+            StreetControl.SetTitle("Street:");
+            BuildingControl.SetTitle("Building:");
+            TurnOffTypeControl.SetTitle("Turn Off Type:");
+            ReasonControl.SetTitle("Reason:");
+            TurnOffTimeControl.SetTitle("Turn Off Time:");
+            ExpectedTurnOnTimeControl.SetTitle("Expected Turn On Time:");
+
+            SetTimer();
+        }
+
+        private void InitElectricityGroupList()
+        {
+            electricityGroupList.IsEditable = false;
             electricityGroupList.IsReadOnly = true;
-            electricityGroupList.ItemsSource = new List<int> {1,2,3};
+            electricityGroupList.ItemsSource = new List<int> { 1, 2, 3 };
             electricityGroupList.Text = $"{3}";
             electricityGroupList.SelectionChanged += (sender, args) =>
             {
@@ -40,8 +59,24 @@ namespace LoeApp
                 currentElectricityGroup = comboBox.SelectedIndex;
                 Refresh();
             };
+        }
 
-            SetTimer();
+        private void InitStreetGroupList()
+        {
+            
+
+            electricityStreetList.DisplayMemberPath = "Street";
+            electricityStreetList.IsEditable = true;
+            electricityStreetList.IsReadOnly = false;
+            electricityStreetList.IsTextSearchEnabled = true;
+            electricityStreetList.ItemsSource = _streets;
+            electricityStreetList.Text = $"Choose street";
+            electricityStreetList.SelectionChanged += (sender, args) =>
+            {
+                var comboBox = sender as ComboBox;
+                _currentStreet = comboBox.SelectedIndex;
+                RefreshStreet();
+            };
         }
 
         private void SetTimer()
@@ -53,6 +88,21 @@ namespace LoeApp
             _refreshTimer.Elapsed += OnTimedEvent;
             _refreshTimer.AutoReset = true;
             _refreshTimer.Enabled = true;
+
+            _refreshStreetTimer = new Timers.Timer(TimeSpan.FromMinutes(5));
+
+            _refreshStreetTimer.Elapsed += RefreshStreet;
+            _refreshStreetTimer.AutoReset = true;
+            _refreshStreetTimer.Enabled = true;
+        }
+
+        private void RefreshStreet(object? sender = null, ElapsedEventArgs e = null)
+        {
+            if (_currentStreet != -1)
+            {
+                _streets = _timeGroupsService.GetLoeStatus();
+                UpdateCurrentStreetStatus(_streets[_currentStreet]);
+            }
         }
 
         private void OnTimedEvent(object source = null, ElapsedEventArgs? e = null)
@@ -78,6 +128,17 @@ namespace LoeApp
             }));
         }
 
+        private void UpdateCurrentStreetStatus(DataRow dataRow)
+        {
+            SettlementControl.SetDescription(dataRow.Settlement);
+            StreetControl.SetDescription(dataRow.Street);
+            BuildingControl.SetDescription(dataRow.Building);
+            TurnOffTypeControl.SetDescription(dataRow.TurnOffType);
+            ReasonControl.SetDescription(dataRow.Reason);
+            TurnOffTimeControl.SetDescription(dataRow.TurnOffTime);
+            ExpectedTurnOnTimeControl.SetDescription(dataRow.ExpectedTurnOnTime);
+        }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var destinationUrl =
@@ -89,9 +150,9 @@ namespace LoeApp
             System.Diagnostics.Process.Start(sInfo);
         }
 
-        private void GetLoeStatus()
+        private void ButtonRefreshStreet_OnClick(object sender, RoutedEventArgs e)
         {
-            _timeGroupsService.GetLoeStatus();
+            RefreshStreet();
         }
     }
 }

@@ -7,14 +7,9 @@
         xmlns:controls="clr-namespace:LoeApp.Controls"
         mc:Ignorable="d"
         Background="#CCC"
-        Title="MainWindow" Height="450" Width="600">
+        Title="MainWindow" Height="650" Width="600">
     <Window.Resources>
-        <Style TargetType="Label" x:Key="StateTimeStyle">
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="FontWeight" Value="DemiBold" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
+    
     </Window.Resources>
 
     <Grid>
@@ -61,6 +56,72 @@
                           Margin="0,10"/>
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal">
+
+                <Label Content="Current street:"
+                       VerticalAlignment="Center"
+                       Margin="20,0"
+                       FontSize="20"
+                       FontWeight="DemiBold"/>
+
+                <ComboBox x:Name="electricityStreetList"
+                          Width="140"
+                          Height="40"
+                          FontSize="18"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          FontWeight="DemiBold"
+                          BorderThickness="0"
+                          VerticalContentAlignment="Center"
+                          Background="Transparent"
+                          Foreground="Black"
+                          IsEditable="True"
+                          Margin="0,10"/>
+
+                <Button
+                    Margin="20,10"
+                    Width="120"
+                    Content="Refresh"
+                    Click="ButtonRefreshStreet_OnClick"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Background="#DDD">
+            <controls:DescriptionControl 
+                x:Name="SettlementControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="StreetControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="BuildingControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="TurnOffTypeControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="ReasonControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="TurnOffTimeControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+
+            <controls:DescriptionControl 
+                x:Name="ExpectedTurnOnTimeControl"
+                HorizontalAlignment="Stretch"
+                Height="30"/>
+            </StackPanel>
         </StackPanel>
         <Button HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"

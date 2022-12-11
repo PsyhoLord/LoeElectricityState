@@ -44,11 +44,9 @@ public class TimeGroupsService
         }
     };
 
-    public string GetLoeStatus()
+    public List<DataRow> GetLoeStatus()
     {
-        _htmlParseService.Test();
-
-        return string.Empty;
+        return _htmlParseService.GetStatesPerStreet();
     }
 
     public TimeBorders GetTimeBordersForGroup(int timeGroup)
