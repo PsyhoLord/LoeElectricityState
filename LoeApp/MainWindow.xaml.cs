@@ -73,5 +73,17 @@ namespace LoeApp
                 NextStateControl.Refresh(nextElectricityState, timeNextBorders);
             }));
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var destinationUrl =
+                "https://poweroff.loe.lviv.ua/search_off?csrfmiddlewaretoken=S3nXwVXUie4HvyLehiZ4odjh2i6fnGWx0sKuX3TPRl0gJo2K9NbBzi70rvNh1smQ&city=%D0%9B%D1%8C%D0%B2%D1%96%D0%B2&street=&otg=&q=%D0%9F%D0%BE%D1%88%D1%83%D0%BA";
+            var sInfo = new System.Diagnostics.ProcessStartInfo(destinationUrl)
+            {
+                UseShellExecute = true,
+            };
+            System.Diagnostics.Process.Start(sInfo);
+            
+        }
     }
 }
