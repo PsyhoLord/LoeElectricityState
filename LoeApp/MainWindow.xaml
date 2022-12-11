@@ -36,5 +36,27 @@
             VerticalAlignment="Top"
             Height="50"
             HorizontalAlignment="Stretch" />
-    </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+        
+            <Label Content="Current group:"
+                   VerticalAlignment="Center"
+                   Margin="20,0"
+                   FontWeight="DemiBold"/>
+            
+            <ComboBox x:Name="electricityGroupList"
+                      Width="140"
+                      Height="40"
+                      FontSize="18"
+                      HorizontalContentAlignment="Center"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      BorderThickness="0"
+                      VerticalContentAlignment="Center"
+                      Background="Transparent"
+                      Foreground="Black"
+                      IsEditable="True"
+                      Margin="0,10"/>
+        </StackPanel>
+</StackPanel>
 </Window>

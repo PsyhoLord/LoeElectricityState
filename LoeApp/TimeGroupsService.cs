@@ -62,7 +62,11 @@ public class TimeGroupsService
         {
             if (hours >= TimeBordersList[i].BorderStart.TotalHours
                 && hours <= TimeBordersList[i].BorderEnd.TotalHours)
+            {
+                if (hours == TimeBordersList[i].BorderEnd.TotalHours && offset.Minute != 0)
+                    continue;
                 return i;
+            }
         }
 
         throw new NotImplementedException();
@@ -74,7 +78,7 @@ public class TimeGroupsService
 
         var offSet = GetTimeGroupOffset(0, currentTime);
         offSet = GetDayOfWeekOffset(offSet, currentTime.DayOfWeek);
-        offSet = GetGroupOffset(offSet, _groupOffsets[group - 1]);
+        offSet = GetGroupOffset(offSet, _groupOffsets[group]);
 
         return (ElectricityStateEnum)offSet;
     }
