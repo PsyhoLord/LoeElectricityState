@@ -75,7 +75,9 @@ namespace LoeApp
             {
                 var comboBox = sender as ComboBox;
                 _currentStreet = comboBox.SelectedIndex;
-                UpdateCurrentStreetStatus(_streets[_currentStreet]);
+                
+                if(_currentStreet != -1)
+                    UpdateCurrentStreetStatus(_streets[_currentStreet]);
             };
         }
 
