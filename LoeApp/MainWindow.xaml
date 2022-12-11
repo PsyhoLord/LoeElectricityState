@@ -23,6 +23,12 @@
             VerticalAlignment="Top"
             Background="CornflowerBlue">
 
+            <ProgressBar x:Name = "currentStateProgressBar"
+                         Value = "100" 
+                         Maximum = "400"
+                         BorderThickness="0"
+                         IsIndeterminate = "False" />
+
             <Label x:Name="StateLabel" Content="TEST" HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
                    FontWeight="Bold"
@@ -38,6 +44,7 @@
                    HorizontalAlignment="Right"
                    Content="1:00"
                    Style="{StaticResource StateTimeStyle}"/>
+            
         </Grid>
 
         <Grid 

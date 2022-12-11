@@ -34,6 +34,7 @@ namespace LoeApp
         {
             public SolidColorBrush StateBackground { get; set; }
             public SolidColorBrush StateForeground { get; set; }
+            public SolidColorBrush StateProgressForeground { get; set; }
             public string StateText { get; set; }
         }
 
@@ -46,6 +47,7 @@ namespace LoeApp
                     {
                         StateBackground = new SolidColorBrush(Color.FromRgb(127, 132, 135)),
                         StateForeground = new SolidColorBrush(Color.FromRgb(250, 248, 241)),
+                        StateProgressForeground = new SolidColorBrush(Color.FromRgb(65, 63, 66)),
                         StateText = "NO"
                     }
                 },
@@ -54,7 +56,8 @@ namespace LoeApp
                     new StateStyle
                     {
                         StateBackground = new SolidColorBrush(Color.FromRgb(229, 237, 183)), // rgb(216, 233, 168)
-                        StateForeground = new SolidColorBrush(Color.FromRgb(78, 159, 61)),
+                        StateForeground = new SolidColorBrush(Color.FromRgb(30, 81, 40)),
+                        StateProgressForeground = new SolidColorBrush(Color.FromRgb(78, 159, 61)),
                         StateText = "YES"
                     }
                 },
@@ -63,7 +66,8 @@ namespace LoeApp
                     new StateStyle
                     {
                         StateBackground = new SolidColorBrush(Color.FromRgb(250, 240, 175)),
-                        StateForeground = new SolidColorBrush(Color.FromRgb(198, 151, 73)),
+                        StateForeground = new SolidColorBrush(Color.FromRgb(115, 95, 50)),
+                        StateProgressForeground = new SolidColorBrush(Color.FromRgb(198, 151, 73)),
                         StateText = "MAYBE"
                     }
                 }
@@ -84,6 +88,9 @@ namespace LoeApp
             StateEndLabel.Foreground = currentChosenStyle.StateForeground;
             StateStartLabel.Content = FormatTimeSpan(timeBorders.BorderStart);
             StateEndLabel.Content = FormatTimeSpan(timeBorders.BorderEnd);
+
+            currentStateProgressBar.Background = currentChosenStyle.StateBackground;
+            currentStateProgressBar.Foreground = currentChosenStyle.StateProgressForeground;
         }
 
         private void ApplyNextStateHeaderStyle(ElectricityStateEnum currentElectricityState, TimeBorders timeBorders)
