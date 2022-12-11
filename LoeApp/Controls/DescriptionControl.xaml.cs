@@ -19,7 +19,7 @@ namespace LoeApp.Controls
 
         public void SetDescription(string description)
         {
-            Description.Content = description;
+            Description.Text = description;
         }
     }
 }

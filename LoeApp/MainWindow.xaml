@@ -1,135 +1,164 @@
-﻿<Window x:Class="LoeApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LoeApp"
-        xmlns:controls="clr-namespace:LoeApp.Controls"
-        mc:Ignorable="d"
-        Background="#CCC"
-        Title="MainWindow" Height="650" Width="600">
-    <Window.Resources>
-    
-    </Window.Resources>
+﻿<Window
+    x:Class="LoeApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:LoeApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:LoeApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="600"
+    Height="650"
+    Background="#CCC"
+    mc:Ignorable="d">
+    <Window.Resources />
 
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label 
+            <Label
                 x:Name="CurrentTimeLabel"
-                FontSize="24"
+                Margin="0,10"
                 HorizontalAlignment="Center"
-                Margin="0,10"/>
+                FontSize="24" />
 
             <controls:ElectricityStateControl
                 x:Name="CurrentStateControl"
-                VerticalAlignment="Top"
                 Height="50"
-                HorizontalAlignment="Stretch" />
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top" />
 
             <controls:ElectricityStateControl
                 x:Name="NextStateControl"
-                VerticalAlignment="Top"
                 Height="50"
-                HorizontalAlignment="Stretch" />
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top" />
 
-            <StackPanel Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
 
-                <Label Content="Current group:"
-                       VerticalAlignment="Center"
-                       Margin="20,0"
-                       FontSize="20"
-                       FontWeight="DemiBold"/>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Content="Current group:"
+                    FontSize="20"
+                    FontWeight="DemiBold" />
 
-                <ComboBox x:Name="electricityGroupList"
-                          Width="140"
-                          Height="40"
-                          FontSize="18"
-                          HorizontalContentAlignment="Center"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Top"
-                          FontWeight="DemiBold"
-                          BorderThickness="0"
-                          VerticalContentAlignment="Center"
-                          Background="Transparent"
-                          Foreground="Black"
-                          IsEditable="True"
-                          Margin="0,10"/>
-            </StackPanel>
+                <ComboBox
+                    x:Name="electricityGroupList"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="40"
+                    Margin="0,10"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="18"
+                    FontWeight="DemiBold"
+                    Foreground="Black"
+                    IsEditable="True" />
 
-            <StackPanel Orientation="Horizontal">
 
-                <Label Content="Current street:"
-                       VerticalAlignment="Center"
-                       Margin="20,0"
-                       FontSize="20"
-                       FontWeight="DemiBold"/>
+                <Label
+                    Grid.Row="1"
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Content="Current street:"
+                    FontSize="20"
+                    FontWeight="DemiBold" />
 
-                <ComboBox x:Name="electricityStreetList"
-                          Width="140"
-                          Height="40"
-                          FontSize="18"
-                          HorizontalContentAlignment="Center"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Top"
-                          FontWeight="DemiBold"
-                          BorderThickness="0"
-                          VerticalContentAlignment="Center"
-                          Background="Transparent"
-                          Foreground="Black"
-                          IsEditable="True"
-                          Margin="0,10"/>
+                <ComboBox
+                    x:Name="electricityStreetList"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="40"
+                    Margin="0,10"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="18"
+                    FontWeight="DemiBold"
+                    Foreground="Black"
+                    IsEditable="True" />
 
                 <Button
-                    Margin="20,10"
+                    Grid.Row="1"
+                    Grid.Column="2"
                     Width="120"
-                    Content="Refresh"
-                    Click="ButtonRefreshStreet_OnClick"/>
-            </StackPanel>
+                    Margin="20,10"
+                    Click="ButtonRefreshStreet_OnClick"
+                    Content="Refresh" />
+            </Grid>
 
-            <StackPanel Orientation="Vertical" Background="#DDD">
-            <controls:DescriptionControl 
-                x:Name="SettlementControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+            <Grid Background="#DDD">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:DescriptionControl
+                    x:Name="SettlementControl"
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="StreetControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+                <controls:DescriptionControl
+                    x:Name="StreetControl"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="BuildingControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+                <controls:DescriptionControl
+                    x:Name="BuildingControl"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="TurnOffTypeControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+                <controls:DescriptionControl
+                    x:Name="TurnOffTypeControl"
+                    Grid.Row="3"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="ReasonControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+                <controls:DescriptionControl
+                    x:Name="ReasonControl"
+                    Grid.Row="4"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="TurnOffTimeControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
+                <controls:DescriptionControl
+                    x:Name="TurnOffTimeControl"
+                    Grid.Row="5"
+                    HorizontalAlignment="Stretch" />
 
-            <controls:DescriptionControl 
-                x:Name="ExpectedTurnOnTimeControl"
-                HorizontalAlignment="Stretch"
-                Height="30"/>
-            </StackPanel>
+                <controls:DescriptionControl
+                    x:Name="ExpectedTurnOnTimeControl"
+                    Grid.Row="6"
+                    HorizontalAlignment="Stretch" />
+            </Grid>
         </StackPanel>
-        <Button HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Width="200"
-                Height="40"
-                Content="Open LOE"
-                FontWeight="DemiBold"
-                Click="ButtonBase_OnClick"
-                Margin="20"/>
+        <Button
+            Width="200"
+            Height="40"
+            Margin="20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="ButtonBase_OnClick"
+            Content="Open LOE"
+            FontWeight="DemiBold" />
     </Grid>
 </Window>
