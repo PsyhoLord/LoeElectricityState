@@ -10,7 +10,7 @@ namespace LoeApp
     public partial class MainWindow : Window
     {
         private readonly TimeGroupsService _timeGroupsService = new TimeGroupsService();
-        private static Timer RefreshTimer;
+        private Timer _refreshTimer;
 
         public MainWindow()
         {
@@ -25,11 +25,11 @@ namespace LoeApp
         {
             OnTimedEvent();
             // Create a timer with a two second interval.
-            RefreshTimer = new Timer(TimeSpan.FromMinutes(1));
+            _refreshTimer = new Timer(TimeSpan.FromMinutes(1));
             // Hook up the Elapsed event for the timer. 
-            RefreshTimer.Elapsed += OnTimedEvent;
-            RefreshTimer.AutoReset = true;
-            RefreshTimer.Enabled = true;
+            _refreshTimer.Elapsed += OnTimedEvent;
+            _refreshTimer.AutoReset = true;
+            _refreshTimer.Enabled = true;
         }
 
         private void OnTimedEvent(object source = null, ElapsedEventArgs? e = null)
