@@ -56,7 +56,7 @@ public class TimeGroupsService
 
     public TimeBorders GetTimeBordersForNextGroup(int timeGroup)
     {
-        return TimeBordersList[ClearOffsetFromPeriodic(++timeGroup, 5)];
+        return TimeBordersList[ClearOffsetFromPeriodic(++timeGroup, 6)];
     }
 
     public int GetTimeGroup(DateTimeOffset offset)
