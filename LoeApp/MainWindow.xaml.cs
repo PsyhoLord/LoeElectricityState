@@ -110,8 +110,10 @@ namespace LoeApp
         {
             if (_currentStreet != -1)
             {
-                _streets = _timeGroupsService.GetLoeStatus();
-                UpdateCurrentStreetStatus(_streets[_currentStreet]);
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate {
+                    _streets = _timeGroupsService.GetLoeStatus();
+                    UpdateCurrentStreetStatus(_streets[_currentStreet]);
+                }));
             }
         }
 
