@@ -23,7 +23,7 @@ namespace LoeApp.Controls
                         StateBackground = MainHelper.CreateColorBrushRgb(127, 132, 135),
                         StateForeground = MainHelper.CreateColorBrushRgb(250, 248, 241),
                         StateProgressForeground = MainHelper.CreateColorBrushRgb(65, 63, 66),
-                        StateText = "Немає енергія"
+                        StateText = "Немає енергії"
                     }
                 },
                 {
@@ -33,7 +33,7 @@ namespace LoeApp.Controls
                         StateBackground = MainHelper.CreateColorBrushRgb(229, 237, 183), // rgb(216, 233, 168)
                         StateForeground = MainHelper.CreateColorBrushRgb(30, 81, 40),
                         StateProgressForeground = MainHelper.CreateColorBrushRgb(78, 159, 61),
-                        StateText = "Є енергії"
+                        StateText = "Є енергія"
                     }
                 },
                 {

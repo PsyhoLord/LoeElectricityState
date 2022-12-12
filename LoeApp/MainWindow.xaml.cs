@@ -71,8 +71,6 @@ namespace LoeApp
 
         private void InitStreetGroupList()
         {
-            
-
             electricityStreetList.DisplayMemberPath = "Street";
             electricityStreetList.IsEditable = true;
             electricityStreetList.IsReadOnly = false;
